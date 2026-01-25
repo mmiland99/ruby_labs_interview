@@ -13,7 +13,6 @@ def configure_logging() -> None:
         format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
     )
 
-
 async def async_main() -> int:
     configure_logging()
     logger = logging.getLogger(__name__)
