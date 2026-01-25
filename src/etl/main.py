@@ -1,10 +1,7 @@
 # To run: $env:PYTHONPATH="src"; python -m etl.main
-
 import asyncio
 import logging
-
 import aiohttp
-
 from etl.api_client import fetch_json
 
 def configure_logging() -> None:
