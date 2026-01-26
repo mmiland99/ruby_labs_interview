@@ -54,7 +54,7 @@ async def build_tree(
         valid_posts = [p for p in (validate_post(x) for x in posts_result) if p is not None]
         latest_posts = latest_by_id(valid_posts, 5)
 
-        # Fetch comments concurrently for selected posts
+        # Fetch comments concurrently for selected posts (there were no dates either)
         comment_lists = await asyncio.gather(
             *[_limited(fetch_comments_for_post(session, p["id"])) for p in latest_posts],
             return_exceptions=True,
