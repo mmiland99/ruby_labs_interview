@@ -13,10 +13,7 @@ def _is_str(x: Any) -> bool:
 
 
 def validate_user(user: dict[str, Any]) -> Optional[dict[str, Any]]:
-    """
-    Required fields (for this task): id(int), name(str)
-    Returns a normalized dict or None (log + skip).
-    """
+    # Returns a normalized dict or None (log + skip).
     uid = user.get("id")
     name = user.get("name")
 
@@ -54,7 +51,6 @@ def validate_post(post: dict[str, Any]) -> Optional[dict[str, Any]]:
 def validate_comment(comment: dict[str, Any]) -> Optional[dict[str, Any]]:
 
     # Required fields: id(int), postId(int), body(str), email(str)
-
     cid = comment.get("id")
     pid = comment.get("postId")
     body = comment.get("body")
@@ -73,4 +69,5 @@ def validate_comment(comment: dict[str, Any]) -> Optional[dict[str, Any]]:
         logger.warning("Invalid comment.email: %r (comment_id=%r)", email, cid)
         return None
 
-    return {"id": cid, "postId": pid, "body": body.strip(), "email": email.strip()}
+    clean_body = body.strip().replace("\r\n", " ").replace("\n", " ").replace("\r", " ")
+    return {"id": cid, "postId": pid, "body": clean_body, "email": email.strip()}
